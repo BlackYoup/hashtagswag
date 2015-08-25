@@ -13,6 +13,13 @@ module.exports = function(grunt){
           atBegin: true,
           spawn: false,
         }
+      },
+      less: {
+        files: ["src/less/**/*.less"],
+        tasks: ["less"],
+        options: {
+          atBegin: true
+        }
       }
     },
     less: {
