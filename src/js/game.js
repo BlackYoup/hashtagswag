@@ -1,5 +1,5 @@
 'use strict';
 
-let _ = require('lodash');
+window.onload = function(){
 
-console.log('LODASH', _);
+};

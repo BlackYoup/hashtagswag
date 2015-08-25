@@ -1,7 +1,10 @@
-'use strict';
+var configuration = require('./etc/conf.js');
 
 module.exports = function(grunt){
   grunt.initConfig({
+    configuration: {
+      all: configuration
+    },
     watch: {
       javascript: {
         files: ["src/js/**/*.js"],
@@ -36,11 +39,13 @@ module.exports = function(grunt){
     }
   });
 
+  grunt.loadTasks("tasks");
+
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-contrib-less");
   grunt.loadNpmTasks("grunt-browserify");
   grunt.loadNpmTasks("grunt-express-server");
 
   grunt.registerTask("javascript", ["browserify"]);
-  grunt.registerTask("default", ["javascript", "less"]);
+  grunt.registerTask("default", ["configuration", "javascript", "less"]);
 };
