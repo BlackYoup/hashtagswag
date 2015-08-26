@@ -10,22 +10,23 @@
 
 <body>
 	<header>La vengeance du créateur de l'anneau</header>
-	<aside>
-		<div class="menuPlayer">
-				<img class="imageTitre" src="pictures/LOTR_Graphic_2.png" alt="ImagedeTitre">
+<div class="fomulaireCreation">
+		<aside class="selectPlayer">
+			<section class="menuPlayer">
+					<img class="imageTitre" src="pictures/LOTR_Graphic_2.png" alt="ImagedeTitre">
+				<article>
+					<div>Nom de joueur</div>
+					<p>Entrez votre nom</p>
+					<input type="text" />
+				</article>
+				<article>
+					<div>Pseudo</div>
+					<p>Entrez votre pseudo de joueur</p>
+					<input type="text" />
+				</article>
 				<img class="imageClasse" src="pictures/Orc.png" alt="ImagedeTitre">
-			<article>
-				<div>Nom de joueur</div>
-				<p>Entrez votre nom</p>
-				<input type="text" />
-			</article>
-			<article>
-				<div>Pseudo</div>
-				<p>Entrez votre pseudo de joueur</p>
-				<input type="text" />
-			</article>
-		</div>
-	</aside>
+			</section>
+		</aside>
 	<section class="selectCharacteristics">
 		<article class="classeValue">
 			<div>Selectionnez votre classe</div>
@@ -37,39 +38,35 @@
 				<li>Nazgul</li>
 			</ul>
 		</article>
-		<article>
-			<div>Force</div>
-			<p>Dégâts aux attaques à corps à corps</p>
-			<input type="text" />
-			<button type="button">-</button>
-			<button type="button">+</button>
-		</article>
-		<article>
-			<div>Habileté</div>
-			<p>Capacité d'esquive et aux armes de jet</p>
-			<input type="text" />
-			<button type="button">-</button>
-			<button type="button">+</button>
-		</article>
-		<article>
-			<div>Intelligence</div>
-			<p>Détermine le mana et la capacité de lancement de sort</p>
-			<input type="text" />
-			<button type="button">-</button>
-			<button type="button">+</button>
-		</article>
-		<article>
-			<div>Endurance</div>
-			<p>Donne les points de vie</p>
-			<input type="text" />
-			<button type="button">-</button>
-			<button type="button">+</button>
-		</article>
-		<article>
-			<div>Mana</div>
-			<p>Capacité de lancement de sort</p>
-		</article>		
+		<div class="valueCharacteristics">
+			<article class="setValue">
+				<div>Force</div>
+				<p class="valueText">Dégâts aux attaques à corps à corps</p>
+				<input class="value" type="text" />
+			</article>
+			<article class="setValue">
+				<div>Habileté</div>
+				<p class="valueText">Capacité d'esquive et aux armes de jet</p>
+				<input class="value" type="text" />
+			</article>
+			<article class="setValue">
+				<div>Intelligence</div>
+				<p class="valueText">Détermine le mana et la capacité de lancement de sort</p>
+				<input class="value" type="text" />
+			</article>
+			<article class="setValue">
+				<div>Endurance</div>
+				<p class="valueText">Donne les points de vie</p>
+				<input class="value" type="text" />
+			</article>
+			<article class="setValue">
+				<div>Mana</div>
+				<p class="valueText">Capacité de lancement de sort</p>
+				<input class="value" type="text" />
+			</article>		
+		</div>
 	</section>
+</div>
 </body>
 
 </html>
