@@ -15,6 +15,15 @@ header {
 	height: 100%;
 	background-color: #A67C52;
 }
+.titre{text-align: center;font-family: Ringbearer;color:#803D15;font-size: 25px;}
+.lancementJeu{
+    text-align: center;
+    
+        a{
+            color: #552000; font-size: 30px;font-family: Ringbearer; text-decoration: none;
+        }
+    }
+
 .selectCharacteristics {
 	width: 75%;
 	float: right;
@@ -23,19 +32,18 @@ header {
 .menuPlayer {
 	background-color: #A67C52;
 	padding: 20px;
-	margin-left: auto;
-	margin-right: auto;
+        text-align: center;
+        font-family: Ringbearer;
 }
 .imageTitre {
 	text-align: center;
-	width: 150px;
-	margin-left: auto;
-	margin-right: auto;
+        padding-top: 30px;
 }
+.imageTitreChar{width: 277px;margin-bottom: 20px;}
 
 .imageClasse {
-	text-align: center;
-	width: 150px;
+	width: 75%;
+        margin-top: 20px;
 
 }
 
@@ -55,14 +63,20 @@ header {
 	display: inline-block;
 }
 li {
-	background-color: #A67C52;
-	text-align: center;
-	width: 10%;
+    background-color: #A67C52;
+    text-align: center;
+    width: 10%;
     display: inline-block;
     list-style: none; /* pour enlever les puces sur IE7 */
     margin: 5px;
+    padding: 7px;
+    cursor: pointer;
+    border-radius: 6px;
 }
-
+li:hover{
+    color: #603813;
+}
+.classeValue{font-family: Ringbearer;}
 article div {
 	color: black;
 	font-size: 25px;
@@ -79,7 +93,13 @@ p {
 	height: 100px;
 }
 .setValue {
-	margin-right: 10px;	
-	float: left;
-	width: 17%;
+	margin-right: 6px;
+        float: left;
+        width: 17%;
+        text-align: center;
+        border-right: 1px solid #A67C52;
+        padding-right: 20px;
+        .values{width: 95px;height: 55px;background: #A67C52;margin: -55px 0px 35px 55px; 
+                p{font-size: 41px;margin: 0;}
+        }
 }
