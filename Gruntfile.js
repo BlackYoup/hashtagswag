@@ -7,7 +7,7 @@ module.exports = function(grunt){
     },
     watch: {
       javascript: {
-        files: ["src/js/**/*.js"],
+        files: ["src/js/**/*.js", "src/templates/**/*._tmpl.html"],
         tasks: ["javascript", "less", "express"],
         options: {
           atBegin: true,
@@ -43,6 +43,19 @@ module.exports = function(grunt){
           script: "server/main.js"
         }
       }
+    },
+    jst: {
+      compile: {
+        options: {
+          namespace: "Templates",
+          processName: function(filename) {
+            return filename.replace(/.*\/([^\/]+)\._tmpl\.html$/, "$1");
+          }
+        },
+        files: {
+          "src/js/templates.js": ["src/templates/**/*._tmpl.html"]
+        }
+      }
     }
   });
 
@@ -52,7 +65,8 @@ module.exports = function(grunt){
   grunt.loadNpmTasks("grunt-contrib-less");
   grunt.loadNpmTasks("grunt-browserify");
   grunt.loadNpmTasks("grunt-express-server");
+  grunt.loadNpmTasks("grunt-contrib-jst");
 
-  grunt.registerTask("javascript", ["browserify"]);
-  grunt.registerTask("default", ["configuration", "javascript", "less"]);
+  grunt.registerTask("javascript", ["configuration", "jst", "exportTemplates", "browserify"]);
+  grunt.registerTask("default", ["javascript", "less"]);
 };

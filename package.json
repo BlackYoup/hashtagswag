@@ -17,7 +17,8 @@
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-less": "^1.0.1",
     "grunt-contrib-watch": "^0.6.1",
-    "lodash": "^3.10.1"
+    "lodash": "^3.10.1",
+    "querystring": "^0.2.0"
   },
   "devDependencies": {
     "express": "^4.13.3",
