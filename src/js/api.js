@@ -36,7 +36,7 @@ function receive(err, response, body){
     return new Bacon.Error(err);
   } else{
     try{
-      return body;
+      return JSON.parse(body);
     }catch(e){
       return new Bacon.Error(e);
     }
@@ -48,8 +48,7 @@ function constructOptions(options_){
   if(typeof options_ === "string"){
     options = {
       method: 'GET',
-      url: CONFIGURATION.API + options_,
-      json: true
+      url: CONFIGURATION.API + options_
     };
   } else{
     options = _.extend({}, options_, {

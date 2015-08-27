@@ -66,7 +66,7 @@ Game.createCharacter = function() {
 };
 
 Game.map = function(player){
-  map().init();
+  map(player).init();
 };
 
 window.onload = function(){
