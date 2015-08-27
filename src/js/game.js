@@ -51,7 +51,7 @@ Game.createCharacter = function() {
       .doAction('.preventDefault')
       .map(obj);
   }).flatMapLatest(function(obj){
-    return API.post({
+    return API.send({
       method: 'POST',
       endpoint: '/players',
       data: obj

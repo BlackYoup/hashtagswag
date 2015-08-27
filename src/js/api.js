@@ -19,10 +19,10 @@ module.exports.get = function(options_){
   }).toProperty();
 };
 
-module.exports.post = function(options_){
+module.exports.send = function(options_){
   return Bacon.fromBinder(function(sink){
     var options = constructOptions(options_);
-    request.post(options, function(err, response, body){
+    request[options.method.toLowerCase()](options, function(err, response, body){
       sink(receive(err, response, body));
       sink(new Bacon.End());
     });

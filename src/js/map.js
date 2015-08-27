@@ -4,6 +4,12 @@ var Bacon = require('baconjs');
 
 module.exports = function(player){
   var Map = {};
+  var b_inventory = new Bacon.Bus();
+  var s_inventory = b_inventory.toProperty({});
+
+  s_inventory.log('INVENTORY').onValue(function(){
+    // don't let it to be lazy
+  });
 
   Map.init = function(){
     var s_map = API.get('/map')
@@ -34,11 +40,21 @@ module.exports = function(player){
         newPos: s_newPos,
         map: s_map
       })
-      .filter(Map.checkPlayerCanMove);
+      .filter(Map.checkPlayerCanMove)
+      .flatMapLatest(Map.checkMoveSpecialCases)
+      .log()
+      .map(function(obj){
+        return {
+          map: obj.map,
+          newPos: _.extend({}, obj.newPos, {
+            timestamp: new Date().getTime()
+          })
+        };
+      });
 
     s_canMove.onValue(Map.movePlayer);
 
-    s_canMove.flatMapLatest(Map.apiMove);
+    //s_canMove.map('.newPos').flatMapLatest(Map.apiMove).log();
 
     b_userPos.plug(s_canMove.map('.newPos'));
   };
@@ -113,15 +129,6 @@ module.exports = function(player){
   };
 
   Map.listenEvents = function(s_position, $map){
-    var s_moveClick = Bacon.mergeAll(_.map($map.querySelectorAll('div[data-x][data-y]'), function($elem){
-      return Bacon.fromEvent($elem, 'click');
-    })).map(function(e){
-      return {
-        player_x: parseInt(e.target.getAttribute('data-x')),
-        player_y: parseInt(e.target.getAttribute('data-y'))
-      };
-    });
-
     var s_moveKeyboard = Bacon.fromEvent(document, 'keypress')
       .map('.keyCode')
       .filter(function(k){
@@ -149,7 +156,7 @@ module.exports = function(player){
         }.bind(null, k));
       });
 
-    return Bacon.mergeAll(s_moveClick, s_moveKeyboard).debounceImmediate(100);
+    return s_moveKeyboard.debounceImmediate(100);
   };
 
   Map.movePlayer = function(obj){
@@ -171,7 +178,7 @@ module.exports = function(player){
     var $map = obj.map;
     var pos = obj.newPos;
 
-    var allowedCases = ['E'];
+    var allowedCases = ['E', 'K', 'D'];
 
     var $nextPosType = Map.getCase($map, pos.player_x, pos.player_y).getAttribute('data-case-type');
 
@@ -180,6 +187,40 @@ module.exports = function(player){
 
   Map.getCase = function($map, x, y){
     return $map.querySelector('div[data-x="' + x + '"][data-y="' + y + '"]');
+  };
+
+  Map.apiMove = function(pos){
+    return API.send({
+      method: 'PUT',
+      endpoint: '/position',
+      data: _.extend({}, pos, {
+        playerId: player.id
+      })
+    }).log();
+  };
+
+  Map.checkMoveSpecialCases = function(obj){
+    var $map = obj.map;
+    var pos = obj.newPos;
+
+    var $nextPos = Map.getCase($map, pos.player_x, pos.player_y);
+    var $nextPosType = $nextPos.getAttribute('data-case-type').toLowerCase();
+    if($nextPosType === "k"){
+      s_inventory.first().onValue(function(inventory){
+        b_inventory.push(_.extend({}, inventory, {
+          key: 'key'
+        }));
+      });
+
+      $nextPos.className = $nextPos.className.replace(/map-key/, "map-empty");
+      return Bacon.once(obj);
+    } else if($nextPosType === "d"){
+      return s_inventory.first().filter(function(inventory){
+        return _.has(inventory, 'key');
+      }).map(obj);
+    } else{
+      return Bacon.once(obj);
+    }
   };
 
   return Map;
