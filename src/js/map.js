@@ -19,23 +19,28 @@ module.exports = function(player){
 
     b_userPos.plug(Map.getPlayerPosition(player));
 
-    Bacon.combineTemplate({
-      map: s_map,
-      position: s_userPos.first()
-    }).onValue(Map.spawnPlayer);
+    Bacon
+      .combineTemplate({
+        map: s_map,
+        newPos: s_userPos.first()
+      })
+      .onValue(Map.spawnPlayer);
 
-    var s_move = s_map
-      .flatMapLatest(Map.listenEvents.bind(null, s_userPos))
-      .log();
+    var s_newPos = s_map
+      .flatMapLatest(Map.listenEvents.bind(null, s_userPos));
 
-    Bacon.combineTemplate({
-      position: s_move,
-      map: s_map
-    }).onValue(Map.movePlayer);
+    var s_canMove = Bacon
+      .combineTemplate({
+        newPos: s_newPos,
+        map: s_map
+      })
+      .filter(Map.checkPlayerCanMove);
 
-    s_move.flatMapLatest(Map.apiMove);
+    s_canMove.onValue(Map.movePlayer);
 
-    b_userPos.plug(s_move);
+    s_canMove.flatMapLatest(Map.apiMove);
+
+    b_userPos.plug(s_canMove.map('.newPos'));
   };
 
   Map.drawMap = function(map){
@@ -64,6 +69,7 @@ module.exports = function(player){
     $mapCase.className += 'map-case';
     $mapCase.setAttribute('data-x', x);
     $mapCase.setAttribute('data-y', y);
+    $mapCase.setAttribute('data-case-type', mapCase);
 
     switch(mapCase.toLowerCase()){
       case "w":
@@ -143,12 +149,12 @@ module.exports = function(player){
         }.bind(null, k));
       });
 
-    return Bacon.mergeAll(s_moveClick, s_moveKeyboard);
+    return Bacon.mergeAll(s_moveClick, s_moveKeyboard).debounceImmediate(100);
   };
 
   Map.movePlayer = function(obj){
     var $map = obj.map;
-    var pos = obj.position;
+    var pos = obj.newPos;
 
     var $players = $map.querySelectorAll('div.map-player');
 
@@ -156,8 +162,24 @@ module.exports = function(player){
       $player.className = $player.className.replace(/map-player/, "");
     });
 
-    var $playerPos = $map.querySelector('div[data-x="' + pos.player_x + '"][data-y="' + pos.player_y + '"]');
+    var $playerPos = Map.getCase($map, pos.player_x, pos.player_y);
     $playerPos.className += " map-player";
+    $playerPos.setAttribute('data-move-timestamp', new Date().getTime());
+  };
+
+  Map.checkPlayerCanMove = function(obj){
+    var $map = obj.map;
+    var pos = obj.newPos;
+
+    var allowedCases = ['E'];
+
+    var $nextPosType = Map.getCase($map, pos.player_x, pos.player_y).getAttribute('data-case-type');
+
+    return allowedCases.indexOf($nextPosType.toUpperCase()) > -1;
+  };
+
+  Map.getCase = function($map, x, y){
+    return $map.querySelector('div[data-x="' + x + '"][data-y="' + y + '"]');
   };
 
   return Map;
