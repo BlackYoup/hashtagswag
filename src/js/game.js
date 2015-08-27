@@ -3,6 +3,7 @@ var _ = window._ = require('lodash');
 var API = require("./api.js");
 var Templates = require('./templates.js')();
 var Bacon = require('baconjs');
+var map = require('./map.js');
 
 var Game = {};
 
@@ -65,7 +66,7 @@ Game.createCharacter = function() {
 };
 
 Game.map = function(player){
-  var s_map = API.get('/map').log();
+  map().init();
 };
 
 window.onload = function(){

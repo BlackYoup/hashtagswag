@@ -4,3 +4,4 @@ src/js/configuration.js
 node_modules/
 ~$*
 .DS_Store
+src/js/templates.js
