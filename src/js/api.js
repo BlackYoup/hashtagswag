@@ -1,33 +1,33 @@
-const CONFIGURATION = require('./configuration.js');
-let request = require('request');
-let url = require('url');
-let _ = require('lodash');
-let Bacon = require('baconjs');
-let queryString = require('querystring');
+var CONFIGURATION = require('./configuration.js');
+var request = require('request');
+var url = require('url');
+var _ = require('lodash');
+var Bacon = require('baconjs');
+var queryString = require('querystring');
 
 module.exports.get = function(options_){
-  return Bacon.fromBinder(sink => {
-    let isObj = typeof options_ === "string";
-    let options = constructOptions(options_);
+  return Bacon.fromBinder(function(sink){
+    var isObj = typeof options_ === "string";
+    var options = constructOptions(options_);
 
-    request(options, options.data, (err, response, body) => {
+    request(options, options.data, function(err, response, body){
       sink(receive(err, response, body));
       sink(new Bacon.End());
     });
 
-    return () => {};
+    return function(){};
   }).toProperty();
 };
 
-module.exports.post = options_ => {
-  return Bacon.fromBinder(sink => {
-    let options = constructOptions(options_);
-    request.post(options, (err, response, body) => {
+module.exports.post = function(options_){
+  return Bacon.fromBinder(function(sink){
+    var options = constructOptions(options_);
+    request.post(options, function(err, response, body){
       sink(receive(err, response, body));
       sink(new Bacon.End());
     });
 
-    return () => {};
+    return function(){};
   }).toProperty();
 };
 
@@ -44,7 +44,7 @@ function receive(err, response, body){
 }
 
 function constructOptions(options_){
-  let options;
+  var options;
   if(typeof options_ === "string"){
     options = {
       method: 'GET',

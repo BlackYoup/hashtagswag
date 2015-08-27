@@ -1,59 +1,55 @@
-'use strict';
-
 var _ = window._ = require('lodash');
 
-let API = require("./api.js");
-let Templates = require('./templates.js')();
-let Bacon = require('baconjs');
+var API = require("./api.js");
+var Templates = require('./templates.js')();
+var Bacon = require('baconjs');
 
-let Game = {};
+var Game = {};
 
-Game.init = () => {
+Game.init = function() {
   Game.createCharacter()
     .flatMapLatest(Game.map)
     .log();
 };
 
-Game.createCharacter = () => {
+Game.createCharacter = function() {
   if(localStorage.player){
     return Bacon.constant(localStorage.player);
   }
 
-  let s_character = API.get("/classes")
-    .flatMapLatest(classes => {
-      let $classes = document.querySelector('ul.listeClasse');
+  var s_character = API.get("/classes")
+    .flatMapLatest(function(classes){
+      var $classes = document.querySelector('ul.listeClasse');
 
       $classes.innerHTML = Templates["classes"]({
         classes: classes
       });
 
-      return Bacon.mergeAll(
-        _.map(
-          $classes.querySelectorAll('li[data-id]'), $elem => Bacon.fromEvent($elem, 'click')
-        )
-      );
+      return Bacon.mergeAll(_.map($classes.querySelectorAll('li[data-id]'), function($elem){
+        return Bacon.fromEvent($elem, 'click');
+      }));
     })
-    .map(e => {
+    .map(function(e){
       return parseInt(e.target.getAttribute('data-id'));
     })
     .toProperty();
 
-  let s_pseudo = Bacon.fromEvent(document.querySelector('.player-pseudo'), 'input').log().map(e => {
-    let pseudo = e.target.value.trim();
+  var s_pseudo = Bacon.fromEvent(document.querySelector('.player-pseudo'), 'input').map(function(e){
+    var pseudo = e.target.value.trim();
     return pseudo.length > 0 ? pseudo : false;
   });
 
-  let s_player = Bacon.combineTemplate({
+  var s_player = Bacon.combineTemplate({
     pseudo: s_pseudo,
     classId: s_character
-  }).log().filter(obj => {
+  }).filter(function(obj){
     return obj.pseudo && obj.classId;
-  }).flatMapLatest(obj => {
+  }).flatMapLatest(function(obj){
     return Bacon
       .fromEvent(document.querySelector('.play'), 'click')
       .doAction('.preventDefault')
       .map(obj);
-  }).flatMapLatest(obj => {
+  }).flatMapLatest(function(obj){
     return API.post({
       method: 'POST',
       endpoint: '/players',
@@ -61,17 +57,17 @@ Game.createCharacter = () => {
     });
   });
 
-  s_player.onValue(player => {
+  s_player.onValue(function(player){
     localStorage.player = player;
   });
 
   return s_player;
 };
 
-Game.map = (player) => {
-  let s_map = API.get('/map').log();
+Game.map = function(player){
+  var s_map = API.get('/map').log();
 };
 
-window.onload = () => {
+window.onload = function(){
   Game.init();
 };
