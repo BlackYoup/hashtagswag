@@ -15,7 +15,7 @@ Game.init = function() {
 
 Game.createCharacter = function() {
   if(localStorage.player){
-    return Bacon.constant(localStorage.player);
+    return Bacon.constant(JSON.parse(localStorage.player));
   }
 
   var s_character = API.get("/classes")
@@ -59,7 +59,7 @@ Game.createCharacter = function() {
   });
 
   s_player.onValue(function(player){
-    localStorage.player = player;
+    localStorage.player = JSON.stringify(player);
   });
 
   return s_player;

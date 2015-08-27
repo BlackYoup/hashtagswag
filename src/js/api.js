@@ -10,7 +10,7 @@ module.exports.get = function(options_){
     var isObj = typeof options_ === "string";
     var options = constructOptions(options_);
 
-    request(options, options.data, function(err, response, body){
+    request(options, function(err, response, body){
       sink(receive(err, response, body));
       sink(new Bacon.End());
     });
@@ -52,9 +52,14 @@ function constructOptions(options_){
     };
   } else{
     options = _.extend({}, options_, {
-      uri: CONFIGURATION.API + options_.endpoint,
-      form: options_.data,
+      uri: CONFIGURATION.API + options_.endpoint
     });
+  }
+
+  if(options_.method === "GET" && options_.qs){
+    options.qs = options_.qs;
+  } else if(options_.method !== "GET" && options_.data){
+    options.form = options_.data;
   }
 
   return options;
