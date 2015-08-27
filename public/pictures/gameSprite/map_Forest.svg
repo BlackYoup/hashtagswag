@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve">
+<rect fill="#A7B867" width="256" height="256"/>
+<g opacity="0.3">
+	<ellipse cx="76" cy="201" rx="65" ry="15"/>
+	<ellipse cx="110" cy="189" rx="65" ry="15"/>
+	<ellipse cx="147" cy="175" rx="65" ry="15"/>
+	<ellipse cx="192" cy="219" rx="65" ry="15"/>
+	<ellipse cx="160" cy="204" rx="65" ry="15"/>
+</g>
+<g>
+	<rect x="120.2" y="69.6" fill="#683B11" width="24.5" height="103.6"/>
+	<path fill="#683B11" d="M144.7,163.3h-24.5c0,5.4-4.4,9.8-9.8,9.8h44.1C149.1,173.2,144.7,168.8,144.7,163.3z"/>
+	<circle fill="#006633" cx="100.1" cy="67.7" r="32.4"/>
+	<circle fill="#006633" cx="115.3" cy="88.9" r="32.4"/>
+	<circle fill="#006633" cx="154.5" cy="91.3" r="32.4"/>
+	<circle fill="#006633" cx="146" cy="49.9" r="32.4"/>
+	<circle fill="#008D36" cx="115.3" cy="49.9" r="32.4"/>
+	<circle fill="#008D36" cx="157.2" cy="53.4" r="19.8"/>
+	<circle fill="#008D36" cx="177" cy="67.7" r="19.8"/>
+	<circle fill="#39A935" cx="157.2" cy="82.2" r="32.4"/>
+	<circle fill="#39A935" cx="87" cy="82.2" r="21"/>
+	<circle fill="#39A935" cx="110.4" cy="53.4" r="21"/>
+	<ellipse fill="#93C01F" cx="121.5" cy="82.2" rx="26.2" ry="25.7"/>
+</g>
+<rect x="127.4" y="111.5" fill="#B17F49" width="5" height="61.7"/>
+<path fill="#B17F49" d="M132.4,163.3h-5c0,5.4-4.4,9.8-9.8,9.8l14.9,0C127,173.2,132.4,168.8,132.4,163.3z"/>
+<rect x="64.8" y="95.3" fill="#683B11" width="24.5" height="103.6"/>
+<path fill="#683B11" d="M89.2,189.1H64.8c0,5.4-4.4,9.8-9.8,9.8h44.1C93.6,199,89.2,194.6,89.2,189.1z"/>
+<rect x="70.2" y="95.3" fill="#B17F49" width="5" height="103.6"/>
+<path fill="#B17F49" d="M75.2,189.1h-5c0,5.4-4.4,9.8-9.8,9.8l14.9,0C69.8,199,75.2,194.6,75.2,189.1z"/>
+<circle fill="#006633" cx="44.7" cy="93.5" r="32.4"/>
+<circle fill="#006633" cx="59.9" cy="114.6" r="32.4"/>
+<circle fill="#006633" cx="99.1" cy="117.1" r="32.4"/>
+<circle fill="#006633" cx="90.6" cy="75.7" r="32.4"/>
+<circle fill="#008D36" cx="59.9" cy="75.7" r="32.4"/>
+<circle fill="#008D36" cx="101.7" cy="79.2" r="19.8"/>
+<circle fill="#008D36" cx="121.5" cy="93.5" r="19.8"/>
+<circle fill="#39A935" cx="101.7" cy="108" r="32.4"/>
+<circle fill="#39A935" cx="31.6" cy="108" r="21"/>
+<circle fill="#39A935" cx="55" cy="79.2" r="21"/>
+<ellipse fill="#93C01F" cx="66.1" cy="108" rx="26.2" ry="25.7"/>
+<g>
+	<rect x="177.5" y="120.4" fill="#683B11" width="24.5" height="103.6"/>
+	<circle fill="#006633" cx="157.4" cy="118.5" r="32.4"/>
+	<circle fill="#006633" cx="172.6" cy="139.7" r="32.4"/>
+	<circle fill="#006633" cx="211.8" cy="142.1" r="32.4"/>
+	<circle fill="#006633" cx="203.3" cy="100.7" r="32.4"/>
+	<circle fill="#008D36" cx="172.6" cy="100.7" r="32.4"/>
+	<circle fill="#008D36" cx="214.4" cy="104.2" r="19.8"/>
+	<circle fill="#008D36" cx="234.2" cy="118.5" r="19.8"/>
+	<circle fill="#39A935" cx="214.4" cy="133.1" r="32.4"/>
+	<circle fill="#39A935" cx="144.3" cy="133.1" r="21"/>
+	<circle fill="#39A935" cx="167.7" cy="104.2" r="21"/>
+	<path fill="#683B11" d="M201.9,214.2h-24.5c0,5.4-4.4,9.8-9.8,9.8h44.1C206.3,224,201.9,219.6,201.9,214.2z"/>
+	<ellipse fill="#93C01F" cx="178.8" cy="133.1" rx="26.2" ry="25.7"/>
+</g>
+</svg>
